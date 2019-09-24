@@ -16,7 +16,14 @@
 // lucasNumberMemo(41)  // => 370248451
 // lucasNumberMemo(42)  // => 599074578
 function lucasNumberMemo(n, memo = {}) {
+    if (n in memo) return memo[n];
+    if (n === 0) return 2;
+    if (n === 1) return 1;
 
+    let ans = lucasNumberMemo(n - 1, memo) + lucasNumberMemo(n - 2, memo);
+    memo[n] = ans;
+
+    return ans
 }
 
 
