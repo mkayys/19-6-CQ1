@@ -22,23 +22,42 @@
 // stepper([2, 3, 1, 1, 0, 4, 7, 8])    // => false, there is no way to step to the end
 
 // iterative
-function stepper(nums) {
-    let table = new Array(nums.length).fill(false);
-    table[0] = true;
+// function stepper(nums) {
+//     let table = new Array(nums.length).fill(false);
+//     table[0] = true;
 
-    for (let i = 0; i < nums.length; i++) {
-        if (table[i] === true) {
-            let maxRange = nums[i];
+//     for (let i = 0; i < nums.length; i++) {
+//         if (table[i] === true) {
+//             let maxRange = nums[i];
 
-            for (let j = 1; j <= maxRange; j++) {
-                table[j] = true;
-            }
+//             for (let j = 1; j <= maxRange; j++) {
+//                 table[j] = true;
+//             }
+//         }
+//     }
+    
+//     return table[table.length-1];
+// }
+
+
+
+// recursive
+
+function stepper(nums, memo = {}) {
+    let key = String(nums);
+    if (key in memo) return memo[key];
+    if (nums.length === 0) return true;
+    let maxRange = nums[0];
+
+    for (let step = 1; step <= maxRange; step++) {
+        if (stepper(nums.slice(step), memo)) {
+            memo[key] = true;
+            return true;
         }
     }
-    
-    return table[table.length-1];
+    memo[key] = false;
+    return false;
 }
-
 
 // Write a function, maxNonAdjacentSum(nums), that takes in an array of nonnegative numbers.
 // The function should return the maximum sum of elements in the array we can get if we cannot take
