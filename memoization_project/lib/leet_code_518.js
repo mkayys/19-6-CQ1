@@ -33,6 +33,8 @@
 // can we assume the coins will always be sorted so that the last value is the highest coin value always;
 // use the highest coin and then once we exhaust it, we remove it?
 var change = function(amount, coins, memo = {}) {
+    // need our key to be amount and the coins because the number of unique
+    // combinations change depending on what coins we have for the same amount
     let key = amount + '-' + coins;
     if (key in memo) return memo[key]
     if (amount === 0) return 1;
@@ -44,7 +46,7 @@ var change = function(amount, coins, memo = {}) {
     for (let qty = 0; qty * currentCoin <= amount; qty++) {
         total += change(amount - qty * currentCoin, coins.slice(0, -1), memo)
     }
-
+    // -1 in slice works and removes the last element in this case
     memo[key] = total
     return memo[key];
 
