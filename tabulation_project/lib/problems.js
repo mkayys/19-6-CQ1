@@ -43,19 +43,37 @@
 
 // recursive
 
+// function stepper(nums, memo = {}) {
+//     let key = String(nums);
+//     if (key in memo) return memo[key];
+//     if (nums.length === 0) return true;
+//     let maxRange = nums[0];
+
+//     for (let step = 1; step <= maxRange; step++) {
+//         if (stepper(nums.slice(step), memo)) {
+//             memo[key] = true;
+//             return true;
+//         }
+//     }
+//     memo[key] = false;
+//     return false;
+// }
+
+
+// recursive, memoization ==> space optimized
+
 function stepper(nums, memo = {}) {
-    let key = String(nums);
-    if (key in memo) return memo[key];
+    if (nums.length in memo) return memo[nums.length];
     if (nums.length === 0) return true;
     let maxRange = nums[0];
 
     for (let step = 1; step <= maxRange; step++) {
         if (stepper(nums.slice(step), memo)) {
-            memo[key] = true;
+            memo[nums.length] = true;
             return true;
         }
     }
-    memo[key] = false;
+    memo[nums.length] = false;
     return false;
 }
 
