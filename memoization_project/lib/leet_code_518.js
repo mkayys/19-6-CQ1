@@ -27,3 +27,13 @@
 // 1 <= coin <= 5000
 // the number of coins is less than 500
 // the answer is guaranteed to fit into signed 32 - bit integer
+
+
+
+// can we assume the coins will always be sorted so that the last value is the highest coin value always;
+// use the highest coin and then once we exhaust it, we remove it?
+var change = function(amount, coins, memo = {}) {
+    if (amount === 0) return 0;
+
+
+};
